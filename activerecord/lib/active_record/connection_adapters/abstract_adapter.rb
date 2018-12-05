@@ -152,11 +152,10 @@ module ActiveRecord
       # even if you are on a database that can write. `while_preventing_writes`
       # will prevent writes to the database for the duration of the block.
       def while_preventing_writes
-        original = self.prevent_writes
         self.prevent_writes = true
         yield
       ensure
-        self.prevent_writes = original
+        self.prevent_writes = false
       end
 
       def migrations_paths # :nodoc:
